@@ -1,5 +1,4 @@
 const Neighbors = require("./Grid/Neighbors");
-const CellStates = require('./Organism/Cell/CellStates');
 
 const Hyperparams = {
     setDefaults: function() {
@@ -11,6 +10,9 @@ const Hyperparams = {
 
         this.useGlobalMutability = false;
         this.globalMutability = 5;
+        this.addProb = 33;
+        this.changeProb = 33;
+        this.removeProb = 33;
         
         this.rotationEnabled = true;
 
@@ -23,11 +25,7 @@ const Hyperparams = {
 
         this.foodDropProb = 0;
 
-        this.cost = {};
-        
-        for (var cell of CellStates.living) {
-            this.cost[cell.name] = 1;
-        }
+        this.extraMoverFoodCost = 0;
     },
 
     loadJsonObj(obj) {

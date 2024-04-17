@@ -1,9 +1,8 @@
 // A cell state is used to differentiate type and render the cell
 class CellState{
-    constructor(name, dc_code = ':__:') {
+    constructor(name) {
         this.name = name;
         this.color = 'black';
-        this.dc_code = dc_code;
     }
 
     render(ctx, cell, size) {
@@ -14,47 +13,47 @@ class CellState{
 
 class Empty extends CellState {
     constructor() {
-        super('empty',':vd:');
+        super('empty');
     }
 }
 class Food extends CellState {
     constructor() {
-        super('food',':food:');
+        super('food');
     }
 }
 class Wall extends CellState {
     constructor() {
-        super('wall',':wall:');
+        super('wall');
     }
 }
 class Mouth extends CellState {
     constructor() {
-        super('mouth',':eat:');
+        super('mouth');
     }
 }
 class Producer extends CellState {
     constructor() {
-        super('producer',':prod:');
+        super('producer');
     }
 }
 class Mover extends CellState {
     constructor() {
-        super('mover',':mov:');
+        super('mover');
     }
 }
 class Killer extends CellState {
     constructor() {
-        super('killer',':kill:');
+        super('killer');
     }
 }
 class Armor extends CellState {
     constructor() {
-        super('armor',':arm:');
+        super('armor');
     }
 }
 class Eye extends CellState {
     constructor() {
-        super('eye',':eye:');
+        super('eye');
         this.slit_color = 'black';
     }
     render(ctx, cell, size) {
@@ -74,11 +73,6 @@ class Eye extends CellState {
         ctx.setTransform(1, 0, 0, 1, 0, 0);
     }
 }
-class Fat extends CellState {
-    constructor() {
-        super('fat',':fat:');
-    }
-}
 
 const CellStates = {
     empty: new Empty(),
@@ -90,10 +84,9 @@ const CellStates = {
     killer: new Killer(),
     armor: new Armor(),
     eye: new Eye(),
-    fat: new Fat(),
     defineLists() {
-        this.all = [this.empty, this.food, this.wall, this.mouth, this.producer, this.mover, this.killer, this.armor, this.eye, this.fat];
-        this.living = [this.mouth, this.producer, this.mover, this.killer, this.armor, this.eye, this.fat];
+        this.all = [this.empty, this.food, this.wall, this.mouth, this.producer, this.mover, this.killer, this.armor, this.eye]
+        this.living = [this.mouth, this.producer, this.mover, this.killer, this.armor, this.eye];
     },
     getRandomName: function() {
         return this.all[Math.floor(Math.random() * this.all.length)].name;
